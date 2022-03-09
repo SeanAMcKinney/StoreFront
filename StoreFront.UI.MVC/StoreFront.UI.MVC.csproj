@@ -2458,6 +2458,13 @@
     <Content Include="_Archive\sass\bootstrap\_variables.scss" />
     <Content Include="_Archive\sass\style.scss" />
     <Content Include="Views\Shared\_OriginalLayout.cshtml" />
+    <Content Include="Views\Home\AddToWishlist.cshtml" />
+    <Content Include="Views\Home\Cart.cshtml" />
+    <Content Include="Views\Home\CheckOut.cshtml" />
+    <Content Include="Views\Home\Men.cshtml" />
+    <Content Include="Views\Home\OrderComplete.cshtml" />
+    <Content Include="Views\Home\ProductDetail.cshtml" />
+    <Content Include="Views\Home\Women.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
