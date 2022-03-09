@@ -56,6 +56,7 @@
     <Compile Include="Employee.cs">
       <DependentUpon>PickleBall_Store.tt</DependentUpon>
     </Compile>
+    <Compile Include="Metadata\PickleBall_StoreMetadata.cs" />
     <Compile Include="PickleBall_Store.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

@@ -1,4 +1,8 @@
-﻿using System.Web.Mvc;
+﻿using StoreFront.UI.MVC.Models;
+using System.Configuration;
+using System.Net.Mail;
+using System.Web.Mvc;
+using System.Net;
 
 namespace StoreFront.UI.MVC.Controllers
 {
@@ -10,10 +14,9 @@ namespace StoreFront.UI.MVC.Controllers
             return View();
         }
 
-        [HttpGet]       
+        [HttpGet]
         public ActionResult About()
         {
-            ViewBag.Message = "Your app description page.";
 
             return View();
         }
@@ -21,56 +24,106 @@ namespace StoreFront.UI.MVC.Controllers
         [HttpGet]
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
 
             return View();
         }
 
+        [HttpPost]
+        public ActionResult Contact(ContactViewModel cvm)
+        {         
+
+            if (!ModelState.IsValid)
+            {
+                return View(cvm);
+            }//end if
+
+            string message = $"You have recieved an email from {cvm.Name}.<br/>" +
+                $"Subject: {cvm.Subject}<br/>" +
+                $"Message: {cvm.Message}<br/>" +
+                $"Please reply to {cvm.Email} with your response at your earliest convenience.";
+
+            //MailMessage - What sends the email
+            //Overload for MailMessage - FORM, TO, SUBJECT, BOSY
+            MailMessage mm = new MailMessage("administrator@mckinneywebdev.com", "seanamckinney8@gmail.com", cvm.Subject, message);
+
+            //MailMessage Properties
+            mm.IsBodyHtml = true;
+            mm.Priority = MailPriority.High;
+            //Reply to the sender and not our website/webmail
+            mm.ReplyToList.Add(cvm.Email);
+
+            //SmtpClient - Info from the host that allows emails to be sent
+            SmtpClient client = new SmtpClient("mail.mckinneywebdev.com");
+
+            //Client Credentials
+            client.Credentials = new NetworkCredential("administrator@mckinneywebdev.com", "eight8ate*");
+
+            //Port options
+            //Test with both to make sure your internet provider isn't blocking one or the other
+            //client.Port = 25;
+            client.Port = 8889;
+
+            //Try to send the email
+            try
+            {
+                //Attempt to send the email
+                client.Send(mm);
+            }
+            catch (System.Exception ex)
+            {
+
+                ViewBag.CustomerMessage = $"We're sorry but your request could not be completed at this time. " +
+                    $"Please try again later. If the issue persists, please contact your site administrator " +
+                    $"and provide the following info:<br/>{ex.StackTrace}";
+                return View(cvm);
+            }// end try/catch
+
+            //If you make it here you have succeeded
+            return View("EmailConfirmation", cvm);
+
+        }
+
+        [Authorize]
         public ActionResult AddToWishlist()
         {
-            ViewBag.Message = "Your contact page.";
 
             return View();
         }
 
+        [Authorize]
         public ActionResult Cart()
         {
-            ViewBag.Message = "Your contact page.";
 
             return View();
         }
 
+        [Authorize]
         public ActionResult CheckOut()
         {
-            ViewBag.Message = "Your contact page.";
 
             return View();
         }
 
         public ActionResult Men()
         {
-            ViewBag.Message = "Your contact page.";
 
             return View();
         }
 
         public ActionResult Women()
         {
-            ViewBag.Message = "Your contact page.";
 
             return View();
         }
-        
+
         public ActionResult OrderComplete()
         {
-            ViewBag.Message = "Your contact page.";
 
             return View();
         }
 
         public ActionResult ProductDetail()
         {
-            ViewBag.Message = "Your contact page.";
 
             return View();
         }
