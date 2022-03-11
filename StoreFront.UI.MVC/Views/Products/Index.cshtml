@@ -1,0 +1,60 @@
+﻿@model IEnumerable<StoreFront.DATA.EF.Product>
+
+@{
+    ViewBag.Title = "Products";
+}
+
+<h2>@ViewBag.Title</h2>
+@if (User.IsInRole("Admin"))
+{
+<p>
+    @Html.ActionLink("Add New Product", "Create")
+</p>
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductDesc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductCategory.ProductCategory1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductStatu.ProductStatusName)
+        </th>
+        @if (User.IsInRole("Admin"))
+        {
+        <th></th>
+        }
+    </tr>
+
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductDesc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductCategory.ProductCategory1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductStatu.ProductStatusName)
+        </td>
+        @if (User.IsInRole("Admin"))
+        {
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.ProductID }) |
+            @Html.ActionLink("Details", "Details", new { id = item.ProductID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.ProductID })
+        </td>
+        }
+    </tr>
+    }
+
+</table>

@@ -1,0 +1,36 @@
+﻿@model StoreFront.DATA.EF.ProductCategory
+
+@{
+    ViewBag.Title = "Product Category - Delete";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<h3>Are you sure you want to <u><b>permenantly</b></u> delete <u><b>Product Category</b></u>?</h3>
+<div>
+    <h4>ProductCategory</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductCategory1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductCategory1)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            @if (User.IsInRole("Admin"))
+            {
+                <input type="submit" value="Delete" class="btn btn-default" />
+            }
+            | @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

@@ -72,6 +72,11 @@
                                     </ul>
                                 </li>
                                 <li><a href="women.html">Women</a></li>
+                                <li>@Html.ActionLink("Departments", "Index", "Departments")</li>
+                                <li>@Html.ActionLink("Employees", "Index", "Employees")</li>
+                                <li>@Html.ActionLink("Products", "Index", "Products")</li>
+                                <li>@Html.ActionLink("Categories", "Index", "ProductCategories")</li>
+                                <li>@Html.ActionLink("Product Status", "Index", "ProductStatus")</li>
                                 <li><a href="about.html">About</a></li>
                                 <li><a href="contact.html">Contact</a></li>
                                 <li class="cart"><a href="cart.html"><i class="icon-shopping-cart"></i> Cart [0]</a></li>
@@ -103,8 +108,8 @@
                 </div>
             </div>
         </nav>
-        
-        
+
+
         @RenderBody()
 
         <footer id="colorlib-footer" role="contentinfo">

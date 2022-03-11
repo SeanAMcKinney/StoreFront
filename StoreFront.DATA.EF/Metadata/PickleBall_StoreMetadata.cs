@@ -52,7 +52,16 @@ namespace StoreFront.DATA.EF//.Metadata
     }
 
     [MetadataType(typeof(EmployeeMetadata))]
-    public partial class Employee { }
+    public partial class Employee
+    {
+        //Create a custom, read-only property for FullName and update the display attribute 
+        [Display(Name = "Employee")]
+        public string FullName
+        {
+            get { return FirstName + " " + LastName; }
+        }
+    }
+    
 
     #endregion
 
@@ -94,7 +103,7 @@ namespace StoreFront.DATA.EF//.Metadata
         [Display(Name = "Product Category")]
         [Required(ErrorMessage = "*")]
         [StringLength(50, ErrorMessage = "* Field must be 50 characters or less")]
-        public string ProductCategory { get; set; }
+        public string ProductCategory1 { get; set; }
     }
 
     [MetadataType(typeof(ProductCategoryMetadata))]

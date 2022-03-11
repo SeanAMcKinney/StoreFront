@@ -1,0 +1,35 @@
+﻿@model StoreFront.DATA.EF.ProductStatu
+
+@{
+    ViewBag.Title = "Product Status - Delete";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<h3>Are you sure you want to <u><b>permenantly</b></u> delete <u><b>Product Status</b></u>?</h3>
+<div>
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductStatusName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductStatusName)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            @if (User.IsInRole("Admin"))
+            {
+                <input type="submit" value="Delete" class="btn btn-default" />
+            }
+            | @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

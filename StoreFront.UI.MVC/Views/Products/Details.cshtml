@@ -1,0 +1,55 @@
+﻿@model StoreFront.DATA.EF.Product
+
+@{
+    ViewBag.Title = Model.ProductName + " - Details";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+   
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductDesc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductDesc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductCategory.ProductCategory1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductCategory.ProductCategory1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductStatu.ProductStatusName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductStatu.ProductStatusName)
+        </dd>
+
+    </dl>
+</div>
+<div>
+    @if (User.IsInRole("Admin"))
+    {
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ProductID }) |
+}
+</div>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

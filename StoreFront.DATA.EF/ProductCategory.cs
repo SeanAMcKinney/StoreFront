@@ -21,7 +21,7 @@ namespace StoreFront.DATA.EF
         }
     
         public int ProductCategoryID { get; set; }
-        public string ProductCategory { get; set; }
+        public string ProductCategory1 { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product> Products { get; set; }

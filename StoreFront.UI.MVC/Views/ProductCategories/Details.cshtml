@@ -1,0 +1,30 @@
+﻿@model StoreFront.DATA.EF.ProductCategory
+
+@{
+    ViewBag.Title = "Product Category - Details";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductCategory1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductCategory1)
+        </dd>
+
+    </dl>
+</div>
+<div>
+    @if (User.IsInRole("Admin"))
+    {
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ProductCategoryID })
+}
+</div>
+<div>
+    | @Html.ActionLink("Back to List", "Index")
+</div>
