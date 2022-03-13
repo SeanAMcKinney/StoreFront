@@ -46,7 +46,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-7 col-md-9">
-                            <div id="colorlib-logo"><a href="index.html">Footwear</a></div>
+                            <div id="colorlib-logo">@Html.ActionLink("The PickleBall Store", "Index", "Home")</div>
                         </div>
                         <div class="col-sm-5 col-md-3">
                             <form action="#" class="search-wrap">
@@ -60,26 +60,24 @@
                     <div class="row">
                         <div class="col-sm-12 text-left menu-1">
                             <ul>
-                                <li class="active"><a href="index.html">Home</a></li>
+                                <li class="active"><a href="@Url.Action("Index", "Home")">Home</a></li>
                                 <li class="has-dropdown">
-                                    <a href="~/Views/Home/Index.cshtml">Men</a>
+                                    @Html.ActionLink("Shop Here", "Index", "Products")
                                     <ul class="dropdown">
-                                        <li><a href="product-detail.html">Product Detail</a></li>
-                                        <li><a href="cart.html">Shopping Cart</a></li>
-                                        <li><a href="checkout.html">Checkout</a></li>
-                                        <li><a href="order-complete.html">Order Complete</a></li>
-                                        <li><a href="add-to-wishlist.html">Wishlist</a></li>
+                                        <li>@Html.ActionLink("Shopping Cart", "Cart", "Home")</li>
+                                        <li>@Html.ActionLink("Checkout", "CheckOut", "Home")</li>
+                                        <li>@Html.ActionLink("Wishlist", "AddToWishlist", "Home")</li>
                                     </ul>
                                 </li>
-                                <li><a href="women.html">Women</a></li>
-                                <li>@Html.ActionLink("Departments", "Index", "Departments")</li>
-                                <li>@Html.ActionLink("Employees", "Index", "Employees")</li>
-                                <li>@Html.ActionLink("Products", "Index", "Products")</li>
-                                <li>@Html.ActionLink("Categories", "Index", "ProductCategories")</li>
-                                <li>@Html.ActionLink("Product Status", "Index", "ProductStatus")</li>
-                                <li><a href="about.html">About</a></li>
-                                <li><a href="contact.html">Contact</a></li>
-                                <li class="cart"><a href="cart.html"><i class="icon-shopping-cart"></i> Cart [0]</a></li>
+                                <li class="has-dropdown">
+                                    @Html.ActionLink("About Us", "About", "Home")
+                                    <ul class="dropdown">
+                                        <li>@Html.ActionLink("Departments", "Index", "Departments")</li>
+                                        <li>@Html.ActionLink("Employees", "Index", "Employees")</li>
+                                    </ul>
+                                </li>
+                                <li>@Html.ActionLink("Contact Us", "Contact", "Home")</li>
+                                <li class="cart"><i class="icon-shopping-cart">@Html.ActionLink("Cart", "Cart", "Home")</i></li>
                             </ul>
                         </div>
                     </div>

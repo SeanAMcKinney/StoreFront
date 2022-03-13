@@ -110,11 +110,12 @@ namespace StoreFront.UI.MVC.Controllers
             return View();
         }
 
-        public ActionResult Women()
+        public ActionResult Womens()
         {
 
             return View();
         }
+
 
         public ActionResult OrderComplete()
         {

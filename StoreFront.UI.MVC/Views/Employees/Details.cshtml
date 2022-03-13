@@ -57,10 +57,10 @@
 <div>
     @if (User.IsInRole("Admin"))
     {
-        @Html.ActionLink("Edit", "Edit", new { id = Model.EmployeeID }) |
+        @Html.ActionLink("Edit", "Edit", new { id = Model.EmployeeID }) 
 }
 </div>
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    | @Html.ActionLink("Back to List", "Index")
 </div>
