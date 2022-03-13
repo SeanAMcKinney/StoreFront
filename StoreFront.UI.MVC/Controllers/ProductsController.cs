@@ -20,6 +20,13 @@ namespace StoreFront.UI.MVC.Controllers
             var products = db.Products.Include(p => p.ProductCategory).Include(p => p.ProductStatu);
             return View(products.ToList());
         }
+       
+        public ActionResult ProductsByCategory(string id)
+        {
+            var pbc = db.Products.Where(p => p.ProductCategory.ProductCategory1 == id);
+
+            return View(pbc);
+        }
 
         // GET: Products/Details/5
         public ActionResult Details(int? id)

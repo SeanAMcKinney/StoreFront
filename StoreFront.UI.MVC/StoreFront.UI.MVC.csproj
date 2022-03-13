@@ -2501,6 +2501,7 @@
     <Content Include="Views\ProductStatus\Details.cshtml" />
     <Content Include="Views\ProductStatus\Edit.cshtml" />
     <Content Include="Views\ProductStatus\Index.cshtml" />
+    <Content Include="Views\Products\ProductsByCategory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

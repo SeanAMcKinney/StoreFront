@@ -77,6 +77,13 @@
                                     </ul>
                                 </li>
                                 <li>@Html.ActionLink("Contact Us", "Contact", "Home")</li>
+                                @*<li>@Html.ActionLink("Login", "Login", "Account")</li>*@
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    <li>@Html.ActionLink("Roles", "Index", "RolesAdmin")</li>
+                                    <li>@Html.ActionLink("Users", "Index", "UserAdmin")</li>
+                                }
+                                    @Html.Partial("_LoginPartial")
                                 <li class="cart"><i class="icon-shopping-cart">@Html.ActionLink("Cart", "Cart", "Home")</i></li>
                             </ul>
                         </div>
@@ -108,7 +115,7 @@
         </nav>
 
 
-        @RenderBody()
+        <main>@RenderBody()</main>
 
         <footer id="colorlib-footer" role="contentinfo">
             <div class="container">

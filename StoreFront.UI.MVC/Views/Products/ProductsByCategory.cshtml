@@ -8,8 +8,7 @@
 @if (User.IsInRole("Admin"))
 {
 <p>
-    <div class="btn btn-light">@Html.ActionLink("Add New Product", "Create")</div>
-    <div class="btn btn-light">@Html.ActionLink("Product Categories", "Index", "ProductCategories")</div>
+    @Html.ActionLink("Add New Product", "Create")
 </p>
 }
 <table class="table">
