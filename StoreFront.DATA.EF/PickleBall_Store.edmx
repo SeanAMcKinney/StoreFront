@@ -101,6 +101,7 @@
           <Property Name="ProductStatusID" Type="int" Nullable="false" />
           <Property Name="ProductCategoryID" Type="int" Nullable="false" />
           <Property Name="ProductImage" Type="varchar" MaxLength="100" />
+          <Property Name="ProductPrice" Type="money" />
         </EntityType>
         <EntityType Name="ProductStatus">
           <Key>
@@ -315,6 +316,7 @@
           <NavigationProperty Name="ProductCategory" Relationship="Self.FK_Products_ProductCategories" FromRole="Products" ToRole="ProductCategories" />
           <NavigationProperty Name="ProductStatu" Relationship="Self.FK_Products_ProductStatus" FromRole="Products" ToRole="ProductStatus" />
           <Property Name="ProductImage" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ProductPrice" Type="Decimal" Precision="19" Scale="4" />
         </EntityType>
         <EntityType Name="ProductStatu">
           <Key>
@@ -551,6 +553,7 @@
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="PickleBall_StoreModel.Product">
               <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="ProductPrice" ColumnName="ProductPrice" />
                 <ScalarProperty Name="ProductImage" ColumnName="ProductImage" />
                 <ScalarProperty Name="ProductID" ColumnName="ProductID" />
                 <ScalarProperty Name="ProductName" ColumnName="ProductName" />
