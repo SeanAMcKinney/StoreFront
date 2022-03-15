@@ -9,27 +9,44 @@ using System.Web.Mvc;
 using StoreFront.DATA.EF;
 using MVC3.UI.MVC.Utilities;
 using System.Drawing;
+using PagedList;
+using PagedList.Mvc;
 
 
 namespace StoreFront.UI.MVC.Controllers
 {
     public class ProductsController : Controller
     {
-        private PickleBall_StoreEntities db = new PickleBall_StoreEntities();
+        private PickleBall_StoreEntities db = new PickleBall_StoreEntities(); 
 
-        // GET: Products
-        public ActionResult Index()
+        public ActionResult index(string searchString, int page = 1)
         {
-            var products = db.Products.Include(p => p.ProductCategory).Include(p => p.ProductStatu);
-            return View(products.ToList());
+            int pageSize = 10;
+
+            var products = db.Products.OrderBy(m => m.ProductName).ToList();
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                products = (from m in products
+                             where m.ProductName.ToLower().Contains(searchString.ToLower())
+                             select m).ToList();
+            }
+
+            ViewBag.SearchString = searchString;
+
+            return View(products.ToPagedList(page, pageSize));
+
         }
-       
+
+
+
         public ActionResult ProductsByCategory(string id)
         {
             var pbc = db.Products.Where(p => p.ProductCategory.ProductCategory1 == id);
 
             return View(pbc);
         }
+       
 
         // GET: Products/Details/5
         public ActionResult Details(int? id)

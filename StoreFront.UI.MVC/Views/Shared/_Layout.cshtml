@@ -8,32 +8,37 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Rokkitt:100,300,400,700" rel="stylesheet">
 
-    <!-- Animate.css -->
-    <link rel="stylesheet" href="~/Content/css/animate.css">
-    <!-- Icomoon Icon Fonts-->
-    <link rel="stylesheet" href="~/Content/css/icomoon.css">
-    <!-- Ion Icon Fonts-->
-    <link rel="stylesheet" href="~/Content/css/ionicons.min.css">
-    <!-- Bootstrap  -->
-    <link rel="stylesheet" href="~/Content/css/bootstrap.min.css">
+    @*<!-- Animate.css -->
+        <link rel="stylesheet" href="~/Content/css/animate.css">
+        <!-- Icomoon Icon Fonts-->
+        <link rel="stylesheet" href="~/Content/css/icomoon.css">
+        <!-- Ion Icon Fonts-->
+        <link rel="stylesheet" href="~/Content/css/ionicons.min.css">
+        <!-- Bootstrap  -->
+        <link rel="stylesheet" href="~/Content/css/bootstrap.min.css">
 
-    <!-- Magnific Popup -->
-    <link rel="stylesheet" href="~/Content/css/magnific-popup.css">
+        <!-- Magnific Popup -->
+        <link rel="stylesheet" href="~/Content/css/magnific-popup.css">
 
-    <!-- Flexslider  -->
-    <link rel="stylesheet" href="~/Content/css/flexslider.css">
+        <!-- Flexslider  -->
+        <link rel="stylesheet" href="~/Content/css/flexslider.css">
 
-    <!-- Owl Carousel -->
-    <link rel="stylesheet" href="~/Content/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="~/Content/css/owl.theme.default.min.css">
+        <!-- Owl Carousel -->
+        <link rel="stylesheet" href="~/Content/css/owl.carousel.min.css">
+        <link rel="stylesheet" href="~/Content/css/owl.theme.default.min.css">
 
-    <!-- Date Picker -->
-    <link rel="stylesheet" href="~/Content/css/bootstrap-datepicker.css">
-    <!-- Flaticons  -->
-    <link rel="stylesheet" href="~/Content/fonts/flaticon/font/flaticon.css">
+        <!-- Date Picker -->
+        <link rel="stylesheet" href="~/Content/css/bootstrap-datepicker.css">
+        <!-- Flaticons  -->
+        <link rel="stylesheet" href="~/Content/fonts/flaticon/font/flaticon.css">
 
-    <!-- Theme style  -->
-    <link rel="stylesheet" href="~/Content/css/style.css">
+        <!-- Theme style  -->
+        <link rel="stylesheet" href="~/Content/css/style.css">*@
+    @Styles.Render("~/Content/css")
+
+
+    @RenderSection("htmlHead", required: false)
+
 
 </head>
 <body>
@@ -201,7 +206,7 @@
         <a href="#" class="js-gotop"><i class="ion-ios-arrow-up"></i></a>
     </div>
 
-    <!-- jQuery -->
+    @*<!-- jQuery -->
     <script src="~/Content/js/jquery.min.js"></script>
     <!-- popper -->
     <script src="~/Content/js/popper.min.js"></script>
@@ -223,7 +228,9 @@
     <!-- Stellar Parallax -->
     <script src="~/Content/js/jquery.stellar.min.js"></script>
     <!-- Main -->
-    <script src="~/Content/js/main.js"></script>
+    <script src="~/Content/js/main.js"></script>*@
+
+    @Scripts.Render("~/bundles/template")
 
     @RenderSection("scripts", false)
 
