@@ -14,7 +14,8 @@
         <AssociationConnector Association="PickleBall_StoreModel.FK_Employees_Employees1" ManuallyRouted="false" />
         <AssociationConnector Association="PickleBall_StoreModel.FK_Products_ProductCategories" ManuallyRouted="false" />
         <AssociationConnector Association="PickleBall_StoreModel.FK_Products_ProductStatus" ManuallyRouted="false" />
-      </Diagram>
+        <EntityTypeShape EntityType="PickleBall_StoreModel.AspNetUserLogin" Width="1.5" PointX="8.75" PointY="4.25" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

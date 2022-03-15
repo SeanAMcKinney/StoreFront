@@ -50,6 +50,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AspNetRole.cs">
+      <DependentUpon>PickleBall_Store.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetUser.cs">
+      <DependentUpon>PickleBall_Store.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetUserClaim.cs">
+      <DependentUpon>PickleBall_Store.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetUserLogin.cs">
+      <DependentUpon>PickleBall_Store.tt</DependentUpon>
+    </Compile>
+    <Compile Include="C__MigrationHistory.cs">
+      <DependentUpon>PickleBall_Store.tt</DependentUpon>
+    </Compile>
     <Compile Include="Department.cs">
       <DependentUpon>PickleBall_Store.tt</DependentUpon>
     </Compile>
@@ -82,6 +97,9 @@
       <DependentUpon>PickleBall_Store.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="sysdiagram.cs">
+      <DependentUpon>PickleBall_Store.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="PickleBall_Store.edmx">

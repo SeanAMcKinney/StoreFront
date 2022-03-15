@@ -26,6 +26,9 @@
         <th>
             @Html.DisplayNameFor(model => model.ProductStatu.ProductStatusName)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductImage)
+        </th>
                @if (User.IsInRole("Admin"))
         {
             <th></th>
@@ -47,6 +50,10 @@
             <td>
                 @Html.DisplayFor(modelItem => item.ProductStatu.ProductStatusName)
             </td>
+            <td>
+                <img src="~/Content/store_images/t_@item.ProductImage" alt="@item.ProductName" title="@item.ProductName" />
+            </td>
+
             <td>@Html.ActionLink("Details", "Details", new { id = item.ProductID })</td>
             @if (User.IsInRole("Admin"))
             {

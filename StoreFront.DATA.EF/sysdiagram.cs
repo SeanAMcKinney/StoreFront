@@ -12,16 +12,12 @@ namespace StoreFront.DATA.EF
     using System;
     using System.Collections.Generic;
     
-    public partial class Product
+    public partial class sysdiagram
     {
-        public int ProductID { get; set; }
-        public string ProductName { get; set; }
-        public string ProductDesc { get; set; }
-        public int ProductStatusID { get; set; }
-        public int ProductCategoryID { get; set; }
-        public string ProductImage { get; set; }
-    
-        public virtual ProductCategory ProductCategory { get; set; }
-        public virtual ProductStatu ProductStatu { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

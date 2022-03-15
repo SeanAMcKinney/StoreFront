@@ -12,16 +12,11 @@ namespace StoreFront.DATA.EF
     using System;
     using System.Collections.Generic;
     
-    public partial class Product
+    public partial class C__MigrationHistory
     {
-        public int ProductID { get; set; }
-        public string ProductName { get; set; }
-        public string ProductDesc { get; set; }
-        public int ProductStatusID { get; set; }
-        public int ProductCategoryID { get; set; }
-        public string ProductImage { get; set; }
-    
-        public virtual ProductCategory ProductCategory { get; set; }
-        public virtual ProductStatu ProductStatu { get; set; }
+        public string MigrationId { get; set; }
+        public string ContextKey { get; set; }
+        public byte[] Model { get; set; }
+        public string ProductVersion { get; set; }
     }
 }

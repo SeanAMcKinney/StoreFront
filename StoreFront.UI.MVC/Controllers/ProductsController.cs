@@ -7,6 +7,9 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using StoreFront.DATA.EF;
+using MVC3.UI.MVC.Utilities;
+using System.Drawing;
+
 
 namespace StoreFront.UI.MVC.Controllers
 {
@@ -58,10 +61,46 @@ namespace StoreFront.UI.MVC.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
-        public ActionResult Create([Bind(Include = "ProductID,ProductName,ProductDesc,ProductStatusID,ProductCategoryID")] Product product)
+        public ActionResult Create([Bind(Include = "ProductID,ProductName,ProductDesc,ProductStatusID,ProductCategoryID")] Product product, HttpPostedFileBase productPic)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid)       
             {
+                #region File Upload
+
+                string file = "NoImage.png";
+
+                if (productPic != null)
+                {
+                    file = productPic.FileName;
+
+                    string ext = file.Substring(file.LastIndexOf('.'));
+
+                    string[] goodExts = { ".jpeg", ".jpg", ".png", ".jif" };
+
+                    if (goodExts.Contains(ext.ToLower()) && productPic.ContentLength <= 4194304)
+                    {
+                        file = Guid.NewGuid() + ext;
+
+                        #region Resize Image
+
+                        string savePath = Server.MapPath("~/Content/store_images/");
+
+                        Image convertedImage = Image.FromStream(productPic.InputStream);
+
+                        int maxImageSize = 500;
+
+                        int maxThumbSize = 100;
+
+                        ImageUtility.ResizeImage(savePath, file, convertedImage, maxImageSize, maxThumbSize);
+
+                        #endregion
+                    }
+
+                    product.ProductImage = file;
+                }
+
+                #endregion
+
                 db.Products.Add(product);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -96,8 +135,50 @@ namespace StoreFront.UI.MVC.Controllers
         [HttpPost]
         [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProductID,ProductName,ProductDesc,ProductStatusID,ProductCategoryID")] Product product)
+        public ActionResult Edit([Bind(Include = "ProductID,ProductName,ProductDesc,ProductStatusID,ProductCategoryID")] Product product, HttpPostedFileBase productPic)
         {
+            #region File Upload
+
+            string file = "NoImage.png";
+
+            if (productPic != null)
+            {
+                file = productPic.FileName;
+
+                string ext = file.Substring(file.LastIndexOf('.'));
+
+                string[] goodExts = { ".jpeg", ".jpg", ".png", ".gif" };
+
+                if (goodExts.Contains(ext.ToLower()) && productPic.ContentLength <= 4194304)
+                {
+                    file = Guid.NewGuid() + ext;
+
+                    #region Resize Image
+
+                    string savePath = Server.MapPath("~/Content/store_images/");
+
+                    Image convertedImage = Image.FromStream(productPic.InputStream);
+
+                    int maxImageSize = 500;
+
+                    int maxThumbSize = 100;
+
+                    ImageUtility.ResizeImage(savePath, file, convertedImage, maxImageSize, maxThumbSize);
+
+                    #endregion
+
+                    if (product.ProductImage != null && product.ProductImage != "NoImage.png")
+                    {
+                        string path = Server.MapPath("/Content/store_images/");
+                        ImageUtility.Delete(path, product.ProductImage);
+                    }
+
+                    product.ProductImage = file;
+                }
+            }
+
+            #endregion
+
             if (ModelState.IsValid)
             {
                 db.Entry(product).State = EntityState.Modified;
@@ -132,6 +213,10 @@ namespace StoreFront.UI.MVC.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Product product = db.Products.Find(id);
+
+            string path = Server.MapPath("~/Content/store_images/");
+            ImageUtility.Delete(path, product.ProductImage);
+
             db.Products.Remove(product);
             db.SaveChanges();
             return RedirectToAction("Index");

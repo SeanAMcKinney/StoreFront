@@ -187,6 +187,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Utilities\ImageUtility.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\images\Banner-1.jpg" />
@@ -257,6 +258,7 @@
     <Content Include="Content\js\respond.min.js" />
     <Content Include="Content\store_images\Head_Sprint_Pro_3.5_Shoe-Mens.jpg" />
     <Content Include="Content\store_images\K-Swiss_Express_Light_Pickleball_Womens_shoe.jpg" />
+    <Content Include="Content\store_images\NoImage.png" />
     <Content Include="Content\store_images\Onix_Composite_Z5_WideBody.jpg" />
     <Content Include="Content\store_images\Onix_Voyager_graphite_Paddle.jpg" />
     <Content Include="Content\store_images\Penn_40_outdoor_3pk.jpg" />
