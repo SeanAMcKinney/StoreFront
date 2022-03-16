@@ -7,7 +7,7 @@
 <h2>@ViewBag.Title</h2>
 
 <div>
-   
+
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.ProductName)
@@ -48,12 +48,26 @@
         <dd>
             @Html.DisplayFor(model => model.ProductStatu.ProductStatusName)
         </dd>
-        
+
         <dd>
             <img src="~/Content/store_images/@Model.ProductImage" alt="@Model.ProductName" />
         </dd>
 
     </dl>
+
+    @* ADDED THIS FOR "ADD TO CART" FUNCTIONALITY *@
+    <p>
+        @using (Html.BeginForm("AddToCart", "Products", new { @productID = Model.ProductID }, FormMethod.Post, new { @class = "text-center" }))
+        {
+            @Html.HiddenFor(x => x.ProductID)
+            <span class="label" style="color: #000">Quantity: </span>
+            @Html.TextBox("Qty", 1, new { @class = "form-control", @style = "max-width: 50px; display : inline;" })
+            <input type="submit" value="Add to Cart" class="btn btn-primary" name="qty" />
+        }
+    </p>
+</div>
+<div class="col-md-6">
+    <img src="~/Content/store_images/@Model.ProductImage" alt="Book cover" title="@Model.ProductName" />
 </div>
 <div>
     @if (User.IsInRole("Admin"))
