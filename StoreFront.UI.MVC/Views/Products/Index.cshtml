@@ -1,12 +1,12 @@
-﻿@model PagedList.IPagedList<StoreFront.DATA.EF.Product>
-@using PagedList.Mvc;
+﻿@model IEnumerable<StoreFront.DATA.EF.Product>
+@*@using PagedList.Mvc;*@
 @{
     ViewBag.Title = "Products";
 }
 
 <h2>@ViewBag.Title</h2>
 
-@using (Html.BeginForm("Index", "Products", FormMethod.Get))
+@*@using (Html.BeginForm("Index", "Products", FormMethod.Get))
 {
     <p>
         Find by Product Name:
@@ -17,7 +17,7 @@
 
 Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 
-@Html.PagedListPager(Model, page => Url.Action("Index", new { page, searchString = ViewBag.SearchString }))
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, searchString = ViewBag.SearchString }))*@
 
 
 
@@ -34,27 +34,24 @@ Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.Page
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().ProductName)
+                @Html.DisplayNameFor(model => model.ProductName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().ProductDesc)
+                @Html.DisplayNameFor(model => model.ProductDesc)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().ProductPrice)
+                @Html.DisplayNameFor(model => model.ProductPrice)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().ProductCategory.ProductCategory1)
+                @Html.DisplayNameFor(model => model.ProductCategory.ProductCategory1)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().ProductStatu.ProductStatusName)
+                @Html.DisplayNameFor(model => model.ProductStatu.ProductStatusName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().ProductImage)
+                @Html.DisplayNameFor(model => model.ProductImage)
             </th>
-            @if (User.IsInRole("Admin"))
-            {
-                <th></th>
-            }
+            <th></th>
         </tr>
     </thead>
 

@@ -17,29 +17,36 @@ namespace StoreFront.UI.MVC.Controllers
 {
     public class ProductsController : Controller
     {
-        private PickleBall_StoreEntities db = new PickleBall_StoreEntities(); 
+        private PickleBall_StoreEntities db = new PickleBall_StoreEntities();
 
-        public ActionResult index(string searchString, int page = 1)
+        // GET: Products
+        public ActionResult Index(string searchFilter)
         {
-            int pageSize = 10;
+            var products = db.Products.Include(p => p.ProductCategory).Include(p => p.ProductStatu);
+            #region Optional Search filter
 
-            var products = db.Products.OrderBy(m => m.ProductName).ToList();
-
-            if (!String.IsNullOrEmpty(searchString))
+            if (String.IsNullOrEmpty(searchFilter))
             {
-                products = (from m in products
-                             where m.ProductName.ToLower().Contains(searchString.ToLower())
-                             select m).ToList();
+                var prod = db.Products;
+                return View(prod.ToList());
+            }
+            else
+            {
+
+                string searchUpCase = searchFilter.ToUpper();
+
+                List<Product> searchResults = db.Products.Where(
+                    a => a.ProductName.ToUpper().Contains(searchUpCase)).ToList();
+
+                return View(searchResults);
             }
 
-            ViewBag.SearchString = searchString;
-
-            return View(products.ToPagedList(page, pageSize));
-
+            #endregion
+            //return View(products.ToList());
         }
 
 
-
+       
         public ActionResult ProductsByCategory(string id)
         {
             var pbc = db.Products.Where(p => p.ProductCategory.ProductCategory1 == id);

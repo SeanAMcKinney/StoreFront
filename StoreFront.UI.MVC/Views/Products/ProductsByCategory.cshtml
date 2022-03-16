@@ -7,11 +7,11 @@
 <h2>@ViewBag.Title</h2>
 @if (User.IsInRole("Admin"))
 {
-<p>
-    @Html.ActionLink("Add New Product", "Create")
-</p>
+    <p>
+        @Html.ActionLink("Add New Product", "Create")
+    </p>
 }
-<table class="table">
+<table class="table data-table table-striped">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.ProductName)
@@ -28,10 +28,7 @@
         <th>
             @Html.DisplayNameFor(model => model.ProductImage)
         </th>
-        @if (User.IsInRole("Admin"))
-        {
-            <th></th>
-        }
+        <th></th>
     </tr>
 
     @foreach (var item in Model)
@@ -51,16 +48,29 @@
         </td>
         <td>
             <img src="~/Content/store_images/t_@item.ProductImage" alt="@item.ProductName" title="@item.ProductName" />
-        </td>
-        <td>@Html.ActionLink("Details", "Details", new { id = item.ProductID })</td>
-        @if (User.IsInRole("Admin"))
-        {
+
+            @if (User.IsInRole("Admin"))
+            {
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ProductID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ProductID })
+                @Html.ActionLink("Edit", "Edit", new { id = item.ProductID })
+                | @Html.ActionLink("Delete", "Delete", new { id = item.ProductID })
             </td>
         }
-    </tr>
+        else
+        {
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.ProductID })
+            </td>
+        }
+        </tr>
     }
 
 </table>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $(".data-table").DataTable();
+        })
+    </script>
+}
