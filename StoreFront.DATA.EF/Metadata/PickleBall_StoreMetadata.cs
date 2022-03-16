@@ -88,6 +88,11 @@ namespace StoreFront.DATA.EF//.Metadata
         [Required(ErrorMessage = "*")]
         public int ProductCategoryID { get; set; }
 
+        [Display(Name ="Price")]
+        /*[DisplayFormat(NullDisplayText = "-N/A-")]*/
+        [DisplayFormat(DataFormatString = "{0:C}")]
+        public Nullable<decimal> ProductPrice { get; set; }
+
     }
 
     [MetadataType(typeof(ProductMetadata))]

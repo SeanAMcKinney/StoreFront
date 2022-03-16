@@ -40,11 +40,8 @@ namespace StoreFront.UI.MVC.Controllers
 
                 return View(searchResults);
             }
-
-            #endregion
-            //return View(products.ToList());
+            #endregion        
         }
-
 
        
         public ActionResult ProductsByCategory(string id)
