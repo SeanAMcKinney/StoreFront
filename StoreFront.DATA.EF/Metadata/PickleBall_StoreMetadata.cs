@@ -131,4 +131,26 @@ namespace StoreFront.DATA.EF//.Metadata
     public partial class ProductStatu { }
     #endregion
 
+    #region UserDetailMetadata
+    public class UserDetailMetadata
+    {
+        
+        //public string UserID { get; set; }
+
+        [Display(Name = "First Name")]
+        [Required(ErrorMessage = "*")]
+        public string FirstName { get; set; }
+
+        [Display(Name = "Last Name")]
+        [Required(ErrorMessage = "*")]
+        public string LastName { get; set; }
+
+        public string FavoritePlayer { get; set; }
+    }
+
+    [MetadataType(typeof(UserDetailMetadata))]
+    public partial class UserDetail { }
+
+    #endregion
+
 }//end namespace

@@ -1,21 +1,40 @@
 ﻿@using Microsoft.AspNet.Identity
+@using StoreFront.DATA.EF;
+
+@{
+    //Added to be able to Substring() Username below so full email address is not shown
+    int location = User.Identity.GetUserName().IndexOf("@");
+}
+
+
+
 @if (Request.IsAuthenticated)
 {
-    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+
+    PickleBall_StoreEntities db = new PickleBall_StoreEntities();
+    string userID = User.Identity.GetUserId();
+    UserDetail currentUser = db.UserDetails.Where(ud => ud.UserID == userID).FirstOrDefault();
+    string userFN = "Guest"; //defaulting this to something in case no match is found for the UserDetail object
+    string favePlayer = "#000000";
+
+    if (currentUser != null)
+    {
+        //then we have a match
+        userFN = currentUser.FirstName;
+        favePlayer = currentUser.FavoritePlayer;
+    }
+
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
     {
         @Html.AntiForgeryToken()
-
-
-        <li>
-            @Html.ActionLink(User.Identity.GetUserName(), "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+        <li>          
+            @Html.ActionLink($"Hi {userFN}", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", style = $"color: {favePlayer}; text-shadow: 1px 1px #CCCCCC;" })
         </li>
         <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
-
     }
 }
 else
 {
-
-    @*<li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>*@
+    <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
     <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
 }

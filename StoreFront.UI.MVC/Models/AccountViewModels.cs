@@ -79,6 +79,18 @@ namespace StoreFront.UI.MVC.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        //ADDED Properties for custom user registration (user details)
+        [Required]
+        public string FirstName { get; set; }
+
+        [Required]
+        public string LastName { get; set; }
+
+
+        public string FavoritePlayer { get; set; }
+
+
     }
 
     public class ResetPasswordViewModel

@@ -88,7 +88,9 @@
                                     <li>@Html.ActionLink("Roles", "Index", "RolesAdmin")</li>
                                     <li>@Html.ActionLink("Users", "Index", "UserAdmin")</li>
                                 }
-                                @Html.Partial("_LoginPartial")
+                                <li class="has-dropdown"><a href="#">Account</a>
+                                    <ul class="dropdown">@Html.Partial("_LoginPartial")</ul>
+                                </li>
                                 @*<li class="cart"><i class="icon-shopping-cart">@Html.ActionLink("Cart", "Index", "ShoppingCart")</i></li>*@
                                 <li class="cart">
                                     <i class="icon-shopping-cart">
@@ -171,8 +173,8 @@
                         <h4>Information</h4>
                         <p>
                             <ul class="colorlib-footer-links">
-                                <li><a href="#">About us</a></li>                              
-                                <li><a href="#">Support</a></li>                              
+                                <li><a href="#">About us</a></li>
+                                <li><a href="#">Support</a></li>
                             </ul>
                         </p>
                     </div>
