@@ -2717,10 +2717,8 @@
     <Content Include="Views\Home\AddToWishlist.cshtml" />
     <Content Include="Views\Home\Cart.cshtml" />
     <Content Include="Views\Home\CheckOut.cshtml" />
-    <Content Include="Views\Home\Men.cshtml" />
     <Content Include="Views\Home\OrderComplete.cshtml" />
     <Content Include="Views\Home\ProductDetail.cshtml" />
-    <Content Include="Views\Home\Women.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\EmailConfirmation.cshtml" />
     <Content Include="Views\Departments\Create.cshtml" />
