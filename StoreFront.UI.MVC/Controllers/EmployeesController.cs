@@ -102,33 +102,37 @@ namespace StoreFront.UI.MVC.Controllers
             return View(employee);
         }
 
-        // GET: Employees/Delete/5
-        [Authorize(Roles = "Admin")]
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Employee employee = db.Employees.Find(id);
-            if (employee == null)
-            {
-                return HttpNotFound();
-            }
-            return View(employee);
-        }
+        #region original EF delete
 
-        // POST: Employees/Delete/5
-        [Authorize(Roles = "Admin")]
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Employee employee = db.Employees.Find(id);
-            db.Employees.Remove(employee);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+
+        //// GET: Employees/Delete/5
+        //[Authorize(Roles = "Admin")]
+        //public ActionResult Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Employee employee = db.Employees.Find(id);
+        //    if (employee == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(employee);
+        //}
+
+        //// POST: Employees/Delete/5
+        //[Authorize(Roles = "Admin")]
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteConfirmed(int id)
+        //{
+        //    Employee employee = db.Employees.Find(id);
+        //    db.Employees.Remove(employee);
+        //    db.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
+        #endregion
 
         protected override void Dispose(bool disposing)
         {
@@ -138,5 +142,19 @@ namespace StoreFront.UI.MVC.Controllers
             }
             base.Dispose(disposing);
         }
+
+
+        //Deletes the publisher record, returns only JSON data on id & the confirmation
+        [AcceptVerbs(HttpVerbs.Post)]
+        public JsonResult AjaxDelete(int id)
+        {
+            Employee employee = db.Employees.Find(id);
+            db.Employees.Remove(employee);
+            db.SaveChanges();
+
+            string confirmMessage = string.Format("Deleted Employee '{0}' from the database.", employee.LastName);
+            return Json(new { id = id, message = confirmMessage });
+        }
+   
     }
 }

@@ -66,32 +66,31 @@
                         <div class="col-sm-12 text-left menu-1">
                             <ul>
                                 <li class="active"><a href="@Url.Action("Index", "Home")">Home</a></li>
-                                <li class="has-dropdown">
-                                    @Html.ActionLink("Shop Here", "Index", "Products")
-                                    <ul class="dropdown">
-                                        <li>@Html.ActionLink("Shopping Cart", "Index", "ShoppingCart")</li>
-                                        <li>@Html.ActionLink("Checkout", "CheckOut", "Home")</li>
-                                        <li>@Html.ActionLink("Wishlist", "AddToWishlist", "Home")</li>
-                                    </ul>
+                                <li>
+                                    @Html.ActionLink("Shop Here", "Index", "Products")                                  
                                 </li>
-                                <li class="has-dropdown">
+                                <li>
                                     @Html.ActionLink("About Us", "About", "Home")
-                                    <ul class="dropdown">
-                                        <li>@Html.ActionLink("Departments", "Index", "Departments")</li>
-                                        <li>@Html.ActionLink("Employees", "Index", "Employees")</li>
-                                    </ul>
                                 </li>
                                 <li>@Html.ActionLink("Contact Us", "Contact", "Home")</li>
-                                @*<li>@Html.ActionLink("Login", "Login", "Account")</li>*@
+
                                 @if (User.IsInRole("Admin"))
                                 {
                                     <li>@Html.ActionLink("Roles", "Index", "RolesAdmin")</li>
-                                    <li>@Html.ActionLink("Users", "Index", "UserAdmin")</li>
+                                    <li>@Html.ActionLink("Users", "Index", "UsersAdmin")</li>
                                 }
-                                <li class="has-dropdown"><a href="#">Account</a>
-                                    <ul class="dropdown">@Html.Partial("_LoginPartial")</ul>
+                                <li class="has-dropdown">
+                                    <a href="@Url.Action("Login", "Account")">Account</a>
+                                    <ul class="dropdown">
+                                        @Html.Partial("_LoginPartial")
+                                        @if (User.IsInRole("Admin"))
+                                        {
+                                            <li>@Html.ActionLink("Departments", "Index", "Departments")</li>
+                                            <li>@Html.ActionLink("Employees", "Index", "Employees")</li>
+                                        }
+                                    </ul>
                                 </li>
-                                @*<li class="cart"><i class="icon-shopping-cart">@Html.ActionLink("Cart", "Index", "ShoppingCart")</i></li>*@
+                               
                                 <li class="cart">
                                     <i class="icon-shopping-cart">
                                         @{
@@ -154,7 +153,12 @@
         </nav>
 
 
-        <main>@RenderBody()</main>
+        <main>
+            <div id="MessageDisplay" class="row">
+                <div class="col-md-10 col-md-offset-1" id="MessageContent"></div>
+            </div>
+            @RenderBody()
+        </main>
 
         <footer id="colorlib-footer" role="contentinfo">
             <div class="container">

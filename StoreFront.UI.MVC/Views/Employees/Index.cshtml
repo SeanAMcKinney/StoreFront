@@ -7,11 +7,11 @@
 <h2>@ViewBag.Title</h2>
 @if (User.IsInRole("Admin"))
 {
-<p>
-    @Html.ActionLink("Add New Employee", "Create")
-</p>
+    <p>
+        @Html.ActionLink("Add New Employee", "Create")
+    </p>
 }
-<table class="table">
+<table class="table" id="EmployeesTable">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.FirstName)
@@ -31,29 +31,66 @@
         }
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.FirstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Department.DepartmentName)
-        </td>
-        @if (User.IsInRole("Admin"))
-        {
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.EmployeeID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.EmployeeID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.EmployeeID })
-        </td>
-        }
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr id="Employee-@item.EmployeeID">
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Department.DepartmentName)
+            </td>
+
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.EmployeeID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.EmployeeID }) |
+                @Ajax.ActionLink("Delete", "AjaxDelete", "Employees", new { id = item.EmployeeID },
+               new AjaxOptions
+               {
+                    HttpMethod = "POST",
+                    Confirm = $"Are you sure you want to delete {item.LastName} from Employees?",
+                    OnSuccess = "deleteConfirmed",
+                    OnFailure = "deleteFailed"
+               }
+               )
+
+            </td>
+
+        </tr>
+    }
 
 </table>
+
+<div id="EmployeeDetails"></div>
+
+@section scripts{
+    <script>
+
+        function deleteConfirmed(response, status, data) {
+
+            //Remove the row for the desired publisher from the table on screen
+            var rowId = "#Employee-" + response.id;
+            $("#EmployeesTable").find(rowId).remove();
+
+            //Display a status message(use AJAX response's message property)
+            $("#MessageContent").html("<div class='alert alert-success'>" + response.message + "</div>");
+
+        }
+
+        function deleteFailed(response, status, data) {
+
+            //Display a status message (use AJAX response's message property)
+            $("#MessageContent").html("<div class='alert alert-danger'>Delete unsuccessful. Please try again or contact the network administrator." + response.message + "</div>");
+
+        }     
+
+       
+
+    </script>
+}
