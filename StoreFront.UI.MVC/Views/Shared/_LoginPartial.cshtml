@@ -1,4 +1,4 @@
-﻿@using Microsoft.AspNet.Identity
+﻿@using Microsoft.AspNet.Identity;
 @using StoreFront.DATA.EF;
 
 @{
@@ -15,7 +15,7 @@
     string userID = User.Identity.GetUserId();
     UserDetail currentUser = db.UserDetails.Where(ud => ud.UserID == userID).FirstOrDefault();
     string userFN = "Guest"; //defaulting this to something in case no match is found for the UserDetail object
-    string favePlayer = "#000000";
+    string favePlayer = "";
 
     if (currentUser != null)
     {
@@ -28,7 +28,7 @@
     {
         @Html.AntiForgeryToken()
         <li>          
-            @Html.ActionLink($"Hi {userFN}", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", style = $"color: {favePlayer}; text-shadow: 1px 1px #CCCCCC;" })
+            @Html.ActionLink($"Hi {userFN}", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", style = "text-shadow: 1px 1px #CCCCCC;" })
         </li>
         <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
     }

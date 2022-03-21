@@ -134,7 +134,7 @@ namespace StoreFront.DATA.EF//.Metadata
     #region UserDetailMetadata
     public class UserDetailMetadata
     {
-        
+
         //public string UserID { get; set; }
 
         [Display(Name = "First Name")]

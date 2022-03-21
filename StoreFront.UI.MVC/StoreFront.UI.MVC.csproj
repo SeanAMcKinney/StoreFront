@@ -2752,6 +2752,9 @@
     <Content Include="Views\Products\ProductsByCategory.cshtml" />
     <Content Include="Views\ShoppingCart\Index.cshtml" />
     <Content Include="Views\CustomErrors\Unresolved.cshtml" />
+    <Content Include="Views\Employees\EmployeeDetails.cshtml" />
+    <Content Include="Views\Employees\EmployeeCreate.cshtml" />
+    <Content Include="Views\Employees\EmployeeEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

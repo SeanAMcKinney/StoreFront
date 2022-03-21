@@ -5,13 +5,18 @@
 }
 
 <h2>@ViewBag.Title</h2>
-@if (User.IsInRole("Admin"))
-{
-    <p>
-        @Html.ActionLink("Add New Employee", "Create")
-    </p>
-}
-<table class="table" id="EmployeesTable">
+
+
+<p class="row">
+    <button id="toggleEmployeeCreate" class="btn btn-primary text-right pull-left">Add New</button>
+</p>
+
+<div id="EmployeeCreate">
+    @Html.Partial("EmployeeCreate", new StoreFront.DATA.EF.Employee())
+</div>
+
+
+<table class="table" id="EmployeeTable">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.FirstName)
@@ -48,13 +53,13 @@
             </td>
 
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.EmployeeID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.EmployeeID }) |
+                <a href="" class="EditLink" id="@item.EmployeeID">Edit</a> |
+                <a href="" class="DetailsLink" id="@item.EmployeeID">Details</a> |
                 @Ajax.ActionLink("Delete", "AjaxDelete", "Employees", new { id = item.EmployeeID },
                new AjaxOptions
                {
                     HttpMethod = "POST",
-                    Confirm = $"Are you sure you want to delete {item.LastName} from Employees?",
+                    Confirm = $"Are you sure you want to delete {item.FirstName} {item.LastName} from Employees?",
                     OnSuccess = "deleteConfirmed",
                     OnFailure = "deleteFailed"
                }
@@ -74,7 +79,7 @@
 
         function deleteConfirmed(response, status, data) {
 
-            //Remove the row for the desired publisher from the table on screen
+            //Remove the row for the desired employeefrom the table on screen
             var rowId = "#Employee-" + response.id;
             $("#EmployeesTable").find(rowId).remove();
 
@@ -88,9 +93,157 @@
             //Display a status message (use AJAX response's message property)
             $("#MessageContent").html("<div class='alert alert-danger'>Delete unsuccessful. Please try again or contact the network administrator." + response.message + "</div>");
 
-        }     
+        }
 
-       
+        $('a.DetailsLink').click(function (e) {
+            e.preventDefault(); //This prevents the default behavior -- here that would be reloading the page
+
+            //Target the dialog/pop-up placeholder <div>, pass it data (the clicked link's ID),
+            //Then aplly the jQueryUI dialog plugin to make it a pop-up with various settings.
+            //Open the PublisherDetails partial view in the plpup for the correct publisher.
+            $("#EmployeeDetails").data('eId', $(this).attr('id'))
+                .dialog({
+                    width: 400,
+                    height: 200,
+                    open: function () {
+                        var empID = $(this).data('eId');
+                        $(this).load("/Employee/EmployeeDetails/" + empID);
+                    },
+                    title: "Employee Details",
+                    modal: true,
+                    resizable: false
+                });//End Conversion to dialog box
+
+        });//End details button click event handler
+
+        //************ AJAX CREATE FORM *************
+        $("EmployeeCreate").hide(); //Start with the Create form hidden
+        $("#toggleEmployeeCreate").click(function () {
+            $("#EmployeeCreate").toggle(); //Flip between show/hide onclick
+        });//End create button click event handler
+
+        //********************AJAX CREATE *****************
+
+        /*
+            Summary: When the for is submmitted , we need to format
+            the data (serialization). The notification (MessageContent)
+            will show status updates.
+
+            jQuery AJAX will do the following:
+             - Call the POST AjaxCreate action in the Publishers controler
+             - Pass in the JSON data from the form
+             - On failure, it will:
+                - Notify the user of the error
+             - On success, it will:
+                - Notify the user of success
+                - Resert the form
+                - "Add" the new row to the Publishers table on this page
+         */
+
+        $("#EmployeeCreateForm").submit(function (e) {
+            var formData = $(this).serializeArray();
+            console.log(formData);
+            e.preventDefault();
+
+            $.ajax({
+                url: "/Employees/AjaxCreate",
+                type: "POST",
+                data: formData,
+                dataType: "json",
+                error: function (e) {
+                    $("#MessageContent").html("<div class='alert alert-danger'>There was a problem!</div>");
+                },
+                success: function (foo) {
+                    $("#MessageContent").html("<div class='alert alert-success'>Record successfully added!</div>");
+                    $("#EmployeeCreateForm")[0].reset();
+                    $(function () {
+                        var row = '<tr><td>' + foo.FirstName
+                            + '</td><td>' + foo.LastName
+                            + '</td><td>' + foo.DirctReportID
+                            + '</td><td>' + foo.Title
+                            + '</td><td>' + foo.DepartmentID
+                            + '</td><td>Refresh to view options</td></tr>';
+                        $("#EmployeesTable").append(row);
+                    });//end of build & append row functionality
+                }//end success property
+            });//end Ajax form submission properties
+        });//end of form submit event handler
+
+
+        ////*********** AJAX UPDATE  **************
+        ////Holding variable for the original publisher info
+        var originalContent = null;
+
+        //Wait for an <a> with the Edit class to be clicked
+        $("a.EditLink").click(function (e) {
+            e.preventDefault();
+            var employeeID = $(this).attr("id");
+
+            //Get the <td> elements in that publisher's row
+            var row = $("#Employee-" + employeeID).children();
+
+            //Assign the holding variable the values within those <td>s
+            originalContent = {
+                EmpID: employeeID,
+                FirtsName: row[0].innerText,
+                LastName: row[1].innerText,
+                DirctReportID: row[2].innerText,
+                Title: row[3].innerText,
+                DepartmentID: row[4].innerText
+            };
+
+            console.log(originalContent);
+
+            //Make a GET request for the publisher edit form/info
+            $.get("/Employees/EmployeeEdit/" + employeeID, function (data) {
+                $("#Employee-" + employeeID).replaceWith(
+                    '<tr id="Employee-' + employeeID + '"><td colspan="5">' + data + '</td></tr>');
+            });
+
+        });
+
+        //When the user wants to save an updated publisher...
+        $(document).on("click", "#saveUpdate", function () {
+            var formData = $("#EmployeeEditForm").serializeArray();
+
+            $("#MessageContent").html("<div class='alert alert-info'>Please wait...</div>");
+
+            $.ajax({
+                url: "/Employees/EmployeeEdit",
+                type: "POST",
+                data: formData,
+                dataType: "json",
+                success: function (data) {
+                    $("#MessageContent").html("<div class='alert alert-success'>Your record was successfully updated!</div>");
+                    $("#EmployeeEditForm")[0].reset();
+
+                    $(function () {
+                        var row = '<tr><td>' + foo.FirstName
+                            + '</td><td>' + foo.LastName
+                            + '</td><td>' + foo.DirctReportID
+                            + '</td><td>' + foo.Title
+                            + '</td><td>' + foo.DepartmentID
+                            + '</td><td>Refresh to view options</td></tr>';
+                        $('#Employee-' + data.EmployeeID).replaceWith(row); //replacing the row instead of appending/adding it
+                    });
+
+                },
+                error: function (e) {
+                    $("#MessageContent").html("<div class='alert alert-warning'>There was an error. Please try again or contact the site administrator.</div>");
+
+                    $(function () {
+                        var row = '<tr id="Employee-' + originalContent.EmpId + '"><td>' + originalContent.FirstName + originalContent.LastName
+                            + '</td><td>' + originalContent.DirctReportID
+                            + '</td><td>' + originalContent.Title
+                            + '</td><td>' + originalContent.DepartmentID
+                            + '</td><td>Refresh to view options</td></tr>';
+
+                        $('#Employee-' + data.EmployeeID).replaceWith(row); //replacing the row instead of appending/adding it
+                    });
+
+                }
+            });
+        });
 
     </script>
 }

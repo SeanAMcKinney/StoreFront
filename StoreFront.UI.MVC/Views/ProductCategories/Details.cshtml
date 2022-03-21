@@ -20,11 +20,10 @@
     </dl>
 </div>
 <div>
-    @if (User.IsInRole("Admin"))
-    {
-        @Html.ActionLink("Edit", "Edit", new { id = Model.ProductCategoryID })
-}
+
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ProductCategoryID }) |
+    @Html.ActionLink("Back to List", "Index")
+
 </div>
-<div>
-    | @Html.ActionLink("Back to List", "Index")
-</div>
+
+
