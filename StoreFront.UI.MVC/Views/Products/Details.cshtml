@@ -50,8 +50,8 @@
         </dd>
 
         @*<dd>
-            <img src="~/Content/store_images/@Model.ProductImage" alt="@Model.ProductName" />
-        </dd>*@
+                <img src="~/Content/store_images/@Model.ProductImage" alt="@Model.ProductName" />
+            </dd>*@
 
     </dl>
 
@@ -72,10 +72,15 @@
 <div>
     @if (User.IsInRole("Admin"))
     {
-        @Html.ActionLink("Edit", "Edit", new { id = Model.ProductID }) 
-}
+        <div>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.ProductID })  |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+    else
+    {
+        @Html.ActionLink("Back to List", "Index")
+    }
+
 </div>
 
-<div>
-    | @Html.ActionLink("Back to List", "Index")
-</div>

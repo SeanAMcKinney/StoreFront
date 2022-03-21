@@ -8,7 +8,7 @@
 
 
 <p class="row">
-    <button id="toggleEmployeeCreate" class="btn btn-primary text-right pull-left">Add New</button>
+    <button id="toggleEmployeeCreate" class="btn btn-primary text-right pull-left" >Add New</button>
 </p>
 
 <div id="EmployeeCreate">
@@ -96,18 +96,15 @@
         }
 
         $('a.DetailsLink').click(function (e) {
-            e.preventDefault(); //This prevents the default behavior -- here that would be reloading the page
+            e.preventDefault(); 
 
-            //Target the dialog/pop-up placeholder <div>, pass it data (the clicked link's ID),
-            //Then aplly the jQueryUI dialog plugin to make it a pop-up with various settings.
-            //Open the PublisherDetails partial view in the plpup for the correct publisher.
             $("#EmployeeDetails").data('eId', $(this).attr('id'))
                 .dialog({
                     width: 400,
                     height: 200,
                     open: function () {
                         var empID = $(this).data('eId');
-                        $(this).load("/Employee/EmployeeDetails/" + empID);
+                        $(this).load("/Employees/EmployeeDetails/" + empID);
                     },
                     title: "Employee Details",
                     modal: true,
@@ -117,7 +114,7 @@
         });//End details button click event handler
 
         //************ AJAX CREATE FORM *************
-        $("EmployeeCreate").hide(); //Start with the Create form hidden
+        $("#EmployeeCreate").hide(); //Start with the Create form hidden
         $("#toggleEmployeeCreate").click(function () {
             $("#EmployeeCreate").toggle(); //Flip between show/hide onclick
         });//End create button click event handler

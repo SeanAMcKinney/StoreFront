@@ -426,6 +426,7 @@
     <Content Include="Content\js\respond.min.js" />
     <Content Include="Content\store_images\Head_Sprint_Pro_3.5_Shoe-Mens.jpg" />
     <Content Include="Content\store_images\K-Swiss_Express_Light_Pickleball_Womens_shoe.jpg" />
+    <Content Include="Content\store_images\leadbanner.jpg" />
     <Content Include="Content\store_images\NoImage.png" />
     <Content Include="Content\store_images\Onix_Composite_Z5_WideBody.jpg" />
     <Content Include="Content\store_images\Onix_Voyager_graphite_Paddle.jpg" />
