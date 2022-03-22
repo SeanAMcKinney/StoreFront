@@ -18,9 +18,9 @@ namespace StoreFront.UI.MVC
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
 
-        //protected void application_error()
-        //{
-        //    response.redirect("~/customerrors/unresolved");
-        //}
+        protected void application_error()
+        {
+            Response.Redirect("~/customerrors/unresolved");
+        }
     }//end class
 }//end namespace
