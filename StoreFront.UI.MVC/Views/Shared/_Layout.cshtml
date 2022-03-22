@@ -46,28 +46,20 @@
     <div class="colorlib-loader"></div>
 
     <div id="page">
-        <nav class="colorlib-nav" role="navigation">
-            <div class="top-menu">
+        <nav class="colorlib-nav" role="navigation" />
+            <div class="top-menu" style="background-image: url(/Content/store_images/PickleballsCustomErrorPage.jpg); width: 100%;background-size: cover;">
                 <div class="container">
                     <div class="row">
-                        <div class="col-sm-7 col-md-9">                          
+                        <div class="col-sm-7 col-md-9">
                             <div id="colorlib-logo">@Html.ActionLink("The PickleBall Store", "Index", "Home")</div>
                         </div>
-                        @*<div class="col-sm-5 col-md-3">
-                            <form action="#" class="search-wrap">
-                                <div class="form-group">
-                                    <input type="search" class="form-control search" placeholder="Search">
-                                    <button class="btn btn-primary submit-search text-center" type="submit"><i class="icon-search"></i></button>
-                                </div>
-                            </form>
-                        </div>*@
                     </div>
                     <div class="row">
                         <div class="col-sm-12 text-left menu-1">
                             <ul>
                                 <li class="active"><a href="@Url.Action("Index", "Home")">Home</a></li>
                                 <li>
-                                    @Html.ActionLink("Shop Here", "Index", "Products")                                  
+                                    @Html.ActionLink("Shop Here", "Index", "Products")
                                 </li>
                                 <li>
                                     @Html.ActionLink("About Us", "About", "Home")
@@ -90,7 +82,7 @@
                                         }
                                     </ul>
                                 </li>
-                               
+
                                 <li class="cart">
                                     <i class="icon-shopping-cart">
                                         @{
@@ -168,7 +160,7 @@
                         <h4>Customer Care</h4>
                         <p>
                             <ul class="colorlib-footer-links">
-                                <li><a href="@Url.Action("Contact", "Home")">Contact</a></li>                               
+                                <li><a href="@Url.Action("Contact", "Home")">Contact</a></li>
                             </ul>
                         </p>
                     </div>
@@ -176,7 +168,7 @@
                         <h4>Information</h4>
                         <p>
                             <ul class="colorlib-footer-links">
-                                <li><a href="@Url.Action("About", "Home")">About us</a></li>                               
+                                <li><a href="@Url.Action("About", "Home")">About us</a></li>
                             </ul>
                         </p>
                     </div>
@@ -195,7 +187,7 @@
             <div class="copy">
                 <div class="row">
                     <div class="col-sm-12 text-center">
-                        <p>
+                        <p style="background-image: url(/Content/store_images/PickleballsCustomErrorPage.jpg); width: 100%;background-size: cover;">
                             <span>
                                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                                 Copyright &copy;
