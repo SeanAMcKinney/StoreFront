@@ -9844,6 +9844,10 @@ button.bg-dark:focus {
     text-align: center !important;
 }
 
+div .product-entry:hover {
+    background-color: rgba(23, 162, 184, 0.15);
+}
+
 @media (min-width: 576px) {
     .text-sm-left {
         text-align: left !important;
@@ -10277,6 +10281,7 @@ h1, h2, h3, h4, h5,
 .colorlib-nav .sale {
     padding: 14px 0;
     background: #88c8bc;
+    border-radius: 0 0 7px 7px;
 }
 
     .colorlib-nav .sale h3 {
@@ -10721,6 +10726,11 @@ h1, h2, h3, h4, h5,
 
 .featured {
     width: 100%;
+}
+
+.featured:hover {
+   background-color: rgba(23, 162, 184, 0.37);
+   border-radius: 0 0 7px 7px;
 }
 
     .featured .featured-img {
