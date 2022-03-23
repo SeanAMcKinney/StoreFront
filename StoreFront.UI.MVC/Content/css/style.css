@@ -50,6 +50,7 @@
     border-radius: 7px;
     height: 250px !important;
     color: white;
+    display: none;
 }
 
 dl.dl-horizontal {

@@ -42,7 +42,7 @@
         <div class="form-group">
            
            <div class="col-lg-6">
-                @Html.EditorFor(model => model.DepartmentID, new { htmlAttributes = new { @class = "form-control", placeholder = "Choose a Department"} })
+                @Html.EditorFor(model => model.DepartmentID, new { htmlAttributes = new { @class = "form-control", placeholder = "Select Department By ID# Sales 1, Shipping 2, I.T. 3, Customer Service 4, H.R. 5, Executive 6"} })
                 @Html.ValidationMessageFor(model => model.DepartmentID, "", new { @class = "text-danger"})
             </div>
         </div>
