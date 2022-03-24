@@ -8,9 +8,9 @@
 
 @if (User.IsInRole("Admin"))
 {
-<p>
-    @Html.ActionLink("Add New Department", "Create")
-</p>
+    <p>
+        @Html.ActionLink("Add New Department", "Create")
+    </p>
 }
 
 <table class="table">
@@ -23,28 +23,28 @@
         </th>
         @if (User.IsInRole("Admin"))
         {
-        <th></th>
+            <th></th>
         }
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.DepartmentName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DepartmentID)
-        </td>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DepartmentName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DepartmentID)
+            </td>
 
-        @if (User.IsInRole("Admin"))
-        {
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.DepartmentID }) |
-            @*@Html.ActionLink("Details", "Details", new { id=item.DepartmentID }) |*@
-            @Html.ActionLink("Delete", "Delete", new { id=item.DepartmentID })
-        </td>
-        }
-    </tr>
-}
+            @if (User.IsInRole("Admin"))
+            {
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.DepartmentID }) |                    
+                    @Html.ActionLink("Delete", "Delete", new { id = item.DepartmentID })
+                </td>
+            }
+        </tr>
+    }
 
 </table>
