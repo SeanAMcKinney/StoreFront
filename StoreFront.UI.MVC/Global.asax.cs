@@ -18,7 +18,7 @@ namespace StoreFront.UI.MVC
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
 
-        protected void Application_error()
+        protected void application_error()
         {
             Response.Redirect("~/customerrors/unresolved");
         }
